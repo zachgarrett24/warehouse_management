@@ -2,13 +2,19 @@
 const { 
     client,
     createUser,
-    getAllUsers
+    updateUser,
+    getAllUsers,
+    getUserById,
+    createProduct,
+    getAllProducts,
+    updateProduct
 } = require('./index');
 
 async function dropTables() {
     try {
         console.log('starting to drop tables...')
         await client.query(`
+            DROP TABLE IF EXISTS products;
             DROP TABLE IF EXISTS users;
         `);
         console.log('finished dropping tables...')
@@ -28,6 +34,13 @@ async function createTables() {
                 password VARCHAR(255) NOT NULL,
                 name VARCHAR(255) NOT NULL,
                 company VARCHAR(255) NOT NULL,
+                active BOOLEAN DEFAULT true
+            );
+
+            CREATE TABLE products (
+                id SERIAL PRIMARY KEY,
+                "authorId" INTEGER REFERENCES users(id),
+                title VARCHAR(255) NOT NULL,
                 active BOOLEAN DEFAULT true
             );
         `);
@@ -51,12 +64,37 @@ async function createInitialUsers() {
     
 }
 
+async function createInitialProducts() {
+    try {
+      const [albert, sandra, glamgal] = await getAllUsers();
+  
+      await createProduct({
+        authorId: albert.id,
+        title: "Scary Snake Pet"
+      });
+
+      await createProduct({
+          authorId: sandra.id,
+          title: "Neon Beach Towel"
+      });
+
+      await createProduct({
+          authorId: glamgal.id,
+          title: "Lipstick"
+      });
+
+    } catch (error) {
+      throw error;
+    }
+  }
+
 async function rebuildDB() {
     try {
         client.connect();
         await dropTables();
         await createTables();
         await createInitialUsers();
+        await createInitialProducts();
     } catch (error) {
         throw error;
     }
@@ -66,6 +104,20 @@ async function testDB() {
   try {
     const users = await getAllUsers();
     console.log(users);
+
+    console.log("Calling getAllProducts");
+    const products = await getAllProducts();
+    console.log("Result:", products);
+
+    // console.log("Calling updateProducts on products[0]");
+    // const updateProductResult = await updateProduct(products[0].id, {
+    //   title: "New Title"
+    // });
+    // console.log("Result:", updateProductResult);
+
+    console.log("Calling getUserById with 1");
+    const albert = await getUserById(1);
+    console.log("Result:", albert);
 
   } catch (error) {
     console.error(error);
