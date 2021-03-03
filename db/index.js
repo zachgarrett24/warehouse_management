@@ -140,6 +140,27 @@ async function getAllProducts(){
   }
 }
 
+async function getProductById(productId) {
+  try {
+    const { rows: [ product ]  } = await client.query(`
+      SELECT *
+      FROM products
+      WHERE id = $1;
+    `, [productId]);
+
+    if (!product) {
+      throw {
+        name: "ProductNotFoundError",
+        message: "Could not find a product with that productId"
+      };
+    }
+
+    return product;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function getProductsByUser(userId){
   try {
     const { rows } = await client.query(`
@@ -163,5 +184,6 @@ module.exports = {
   createProduct,
   updateProduct,
   getAllProducts,
+  getProductById,
   getProductsByUser
 }
