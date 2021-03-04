@@ -88,4 +88,25 @@ productsRouter.patch('/:productId', requireUser, async (req, res, next) => {
     }
   });
 
+productsRouter.delete('/:productId', requireUser, async (req, res, next) => {
+    try {
+        const product = await getProductById(req.params.productId);
+
+        if(product && product.authorId === req.user.id){
+            const updatedProduct = await updateProduct(product.id, { active: false});
+            res.send({ product: updatedProduct });
+        } else {
+            next( product ? {
+                name: "UnauthorizedUserError",
+                message: "You can not delete a product that is not yours"
+            } : {
+                name: "ProductNotFoundError",
+                message: "That product does not exist"
+            });
+        }
+    } catch ({name, message}) {
+        next({name, message})
+    }
+});
+
 module.exports = productsRouter;
