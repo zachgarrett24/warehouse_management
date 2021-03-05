@@ -104,9 +104,9 @@ async function createProduct({authorId, title}){
   }
 }
 
-async function updateProduct(id, { title, active }){
+async function updateProduct(id, fields = {} ){
 
-  const setString = Object.keys({ title, active }).map(
+  const setString = Object.keys( fields ).map(
     (key, index) => `"${ key }"=$${ index + 1 }`
   ).join(', ');
 
@@ -115,12 +115,15 @@ async function updateProduct(id, { title, active }){
   }
 
   try {
+    if(setString.length > 0){
+
+    }
     const { rows: [product] } = await client.query(`
       UPDATE products
       SET ${ setString }
       WHERE id=${ id }
       RETURNING *;
-    `, Object.values({ title, active }));
+    `, Object.values( fields ));
 
     return product;
   } catch (error) {
