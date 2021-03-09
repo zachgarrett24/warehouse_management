@@ -17,8 +17,10 @@ server.use((req, res, next) => {
     next();
   });
 
-const apiRouter = require('./api');
-server.use('/api', apiRouter);
+// const apiRouter = require('./api');
+// server.use('/api', apiRouter);
+
+server.use('/api', require('./routes'));
 
 const { client } = require('./db');
 client.connect();
