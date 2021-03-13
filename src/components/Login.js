@@ -10,6 +10,7 @@ const Login = () => {
     const logIn = async ({username, password}) => {
         try {
             const response = await axios.post(`${ BASE_URL }/api/users/login`, {username, password})
+            console.log('response:', response);
             if(response){
                 setUsername('');
                 setPassword('');
