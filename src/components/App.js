@@ -6,7 +6,8 @@ import {
 } from 'react-router-dom'
 
 import {
-    Login
+    Login,
+    Register
 } from './index'
 
 const App = () => {
@@ -14,7 +15,7 @@ return (
     <div className="App">
         <Router>
             <h1>Hello World</h1>
-            <Login />
+            <Register />
         </Router>
     </div>
 )
