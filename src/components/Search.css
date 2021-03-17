@@ -1,0 +1,21 @@
+.searchBox {
+    border: 1px solid black;
+    margin: 10px 10px 0px 10px;
+    height: 30em;
+}
+
+.searchForm {
+    border: 1px solid black;
+    margin: 0px 10px 10px 10px;
+}
+
+.searchBar {
+    width: 100%;
+    margin: 1px;
+}
+
+.productLine {
+    margin: 2px;
+    display: flex;
+    justify-content: space-between;
+}

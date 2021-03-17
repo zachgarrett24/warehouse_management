@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = '/';
+const BASE_URL = 'http://localhost:5000';
 
 export const loginUser = async ({username, password}) => {
     try {
@@ -9,5 +9,14 @@ export const loginUser = async ({username, password}) => {
         return response;
     } catch (error) {
         console.error(error);
+    }
+};
+
+export const getAllProducts = async () => {
+    try {
+        const { data } = await axios.get(`${BASE_URL}/api/products`);
+        return data;      
+    } catch (error) {
+        throw error;
     }
 };

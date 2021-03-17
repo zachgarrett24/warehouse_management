@@ -42,7 +42,7 @@ const Register = () => {
     return (
         <div className="wrapperReg">
             <div className="formWrapper">
-                <h2 className="formTitle">Please Login</h2>
+                <h2 className="formTitle">Create an account</h2>
                 <form className="regForm" onSubmit={handleRegister}>
                     <div className="nameWrapper">
                         <input type="text" placeholder={'name'} value={name} onChange={(event) => setName(event.target.value)} />
@@ -57,7 +57,7 @@ const Register = () => {
                         <input type="password" placeholder={'password'} value={password} onChange={(event) => setPassword(event.target.value)} />
                     </div>
                     <div className="regButtonWrapper">
-                        <button type="submit">Login</button>
+                        <button type="submit">Create Account</button>
                     </div>
                 </form>
             </div>

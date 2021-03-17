@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
     BrowserRouter as Router,
@@ -7,15 +7,25 @@ import {
 
 import {
     Login,
-    Register
+    Register,
+    Search
 } from './index'
 
 const App = () => {
+
 return (
     <div className="App">
         <Router>
-            <h1>Hello World</h1>
-            <Register />
+            <h1>Warehouse Manager</h1>
+            <Route path="/register">
+                <Register />
+            </Route>
+            <Route path="/login">
+                <Login />
+            </Route>
+            <Route path="/search">
+                <Search />
+            </Route>
         </Router>
     </div>
 )
