@@ -3,7 +3,8 @@ import axios from 'axios';
 
 const BASE_URL = 'http://localhost:5000'
 
-const Register = () => {
+const Register = (props) => {
+    const { user, setUser, token, setToken } = props
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
@@ -18,12 +19,16 @@ const Register = () => {
                 setPassword('');
                 setName('');
                 setCompany('');
-                // setToken(response.data.token);
-                // const user = await callApi({token: response.data.token, url: '/api/users/me'});
-                // if(user && user.username) {
-                //     setUser(user);
-                //     storeCurrentUser(user);
-                // }
+                setToken(response.data.token);
+                const auth = {
+                    headers: {'Authorization': `Bearer ${response.data.token}`
+                    }
+                }
+                const loggedUser = await axios.get(`${BASE_URL}/api/users/me`, auth)
+                console.log("the uer:", loggedUser)
+                if(loggedUser && loggedUser.data.username) {
+                    setUser(loggedUser.data);
+                }
             }
         } catch (error) {
             console.error(error);
@@ -37,7 +42,6 @@ const Register = () => {
         signUp({username, password, name, company});
 
     }
-
 
     return (
         <div className="wrapperReg">

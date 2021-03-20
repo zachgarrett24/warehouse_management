@@ -21,10 +21,10 @@ return (
         <Router>
             <h1>Warehouse Manager</h1>
             <Route path="/register">
-                <Register setUser={setUser} setToken={setToken}/>
+                <Register user={user} setUser={setUser} token={token} setToken={setToken}/>
             </Route>
             <Route path="/login">
-                <Login setUser={setUser} setToken={setToken} />
+                <Login user={user} setUser={setUser} token={token} setToken={setToken} />
             </Route>
             <Route path="/search">
                 <Search />
