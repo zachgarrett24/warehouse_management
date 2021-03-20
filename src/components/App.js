@@ -13,16 +13,18 @@ import {
 } from './index'
 
 const App = () => {
+    const [ user, setUser ] = useState({});
+    const [ token, setToken ] = useState('')
 
 return (
     <div className="App">
         <Router>
             <h1>Warehouse Manager</h1>
             <Route path="/register">
-                <Register />
+                <Register setUser={setUser} setToken={setToken}/>
             </Route>
             <Route path="/login">
-                <Login />
+                <Login setUser={setUser} setToken={setToken} />
             </Route>
             <Route path="/search">
                 <Search />

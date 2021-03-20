@@ -3,7 +3,8 @@ import axios from 'axios';
 
 const BASE_URL = 'http://localhost:5000'
 
-const Login = () => {
+const Login = (props) => {
+    const { setUser, setToken } = props;
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -14,7 +15,7 @@ const Login = () => {
             if(response){
                 setUsername('');
                 setPassword('');
-                // setToken(response.data.token);
+                setToken(response.data.token);
                 // const user = await callApi({token: response.data.token, url: '/api/users/me'});
                 // if(user && user.username) {
                 //     setUser(user);
