@@ -8,7 +8,8 @@ import {
 import {
     Login,
     Register,
-    Search
+    Search,
+    Create
 } from './index'
 
 const App = () => {
@@ -25,6 +26,9 @@ return (
             </Route>
             <Route path="/search">
                 <Search />
+            </Route>
+            <Route path="/create">
+                <Create />
             </Route>
         </Router>
     </div>
