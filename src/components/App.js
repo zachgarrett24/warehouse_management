@@ -9,7 +9,8 @@ import {
     Login,
     Register,
     Search,
-    Create
+    Create,
+    Header
 } from './index'
 
 const App = () => {
@@ -19,7 +20,7 @@ const App = () => {
 return (
     <div className="App">
         <Router>
-            <h1>Warehouse Manager</h1>
+            <Header user={ user } />
             <Route path="/register">
                 <Register user={user} setUser={setUser} token={token} setToken={setToken}/>
             </Route>
